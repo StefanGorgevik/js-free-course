@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        
+        <h1>Section 3: Hoisting in practice</h1>
+
+        <script type="text/javascript">
+
+
+//this will run first because it is a function declaration
+        calculateAge(1993);
+            
+            function calculateAge(year) {
+                console.log(2019-year);
+            }
+
+            console.log(calculateAge(1994));
+//with function expression
+retirement(1995);
+            var retirement = function(year) {
+                console.log(65 - (2019 - year));
+            }
+
+            retirement(1994);
+        </script>
+    </body>
+</html>
