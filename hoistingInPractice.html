@@ -11,20 +11,36 @@
 
 
 //this will run first because it is a function declaration
-        calculateAge(1993);
+        //calculateAge(1993); //you can call the function befroe
             
             function calculateAge(year) {
-                console.log(2019-year);
+                return 2019 - year;
             }
-
-            console.log(calculateAge(1994));
+            var calage = calculateAge(1994);
+            console.log("Calculate age" + calage);
 //with function expression
-retirement(1995);
+//retirement(1995);   //you have to create the func. expression before calling it
             var retirement = function(year) {
                 console.log(65 - (2019 - year));
             }
 
             retirement(1994);
+
+            //variables
+            //console.log(age); //undefined
+            var age = 21;
+            console.log(age);
+
+            function foo() {
+              //  console.log(age);
+                var age = 65;
+                console.log(age);
+                            }
+
+            foo();
+            console.log(age);                 
+
+
         </script>
     </body>
 </html>

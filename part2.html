@@ -2,9 +2,90 @@
 <html>
 <head>
 
-    <title></title>
+    <title>Scoping and Scoping Chain</title>
 </head>
 <body>
+
+    <script type="text/javascript">
+
+        //Scoping and Scoping Chain
+
+        // var a = "Hello";
+        // first();
+        // function first() {
+        //     var b = "Hi";
+        //     second();
+        //     function second() {
+        //         var c = "Hey";
+        //         console.log(a + b +c);
+        //     }
+        // }
+
+        // function third() {
+        //     var d = "Zdravo";
+        //     console.log(a + b + C + d)  //cannot access b and c;
+        // }
+
+        // third();
+
+        // var a = "Hello";
+        // first();
+
+        // function first() {
+        //     var b = "Hi";
+        //     second();
+        //     function second() {
+        //         var c = "Hey";
+        //         third();
+        //     }
+        // }
+
+        // function third() {
+        //     var d = "Zdravo";
+        //     console.log(c);  
+        // }
+
+
+        //The this keyword
+
+        console.log(this); // the window object
+
+          calcAge(1994);
+
+        function calcAge(year) {
+            console.log(2019 - year);
+            console.log(this);
+        }
+
+        var john = {
+            name: "John",
+            yearOfBirth: 1990,
+            calculateAge: function(year) {
+                console.log("Age is: " + (2019 - this.yearOfBirth));
+                console.log(this); //the this var becomes the john object
+
+                function innerFunc() {
+                    console.log(this);  //window object
+                    console.log(this.name);
+                }
+                innerFunc();
+            }
+        }
+
+        john.calculateAge(1994);
+
+        var mike = {
+            name: "Mike",
+            yearOfBirth: 1988
+        };
+
+        mike.calculateAge = john.calculateAge; //method borrowing
+        mike.calculateAge();
+
+
+
+
+    </script>
         
 </body>
 </html>
