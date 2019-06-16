@@ -166,7 +166,7 @@ var friends = [ "Dimitar", "Charlie", "Stefan","Liz", "David", "Mattias"];
 
 for( var i = 0; i < friends.length; i++){
     console.log(friends[i].length)
-    if(friends[i].length % 2 === 0){
+    if(i % 2 === 0){
     even.push(friends[i]);
 }
 else  {
