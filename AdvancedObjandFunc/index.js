@@ -160,22 +160,40 @@ obj1.age = 30; //changing age on obj1 will do the same on obj2
 
 //immediately invoked func expressions IIFE
 
-function game() {
-    var score = Math.random() * 10;
-    console.log(score>= 5);
+// function game() {
+//     var score = Math.random() * 10;
+//     console.log(score>= 5);
+// }
+// game();
+
+// (
+//     function() {
+//         var score = Math.random() * 10;
+//         console.log(score>= 5);  
+//     }
+// )();
+
+// (
+//     function(goodLuck) {
+//         var score = Math.random() * 10;
+//         console.log(score>= 5 - goodLuck);  
+//     }
+// )(5);
+
+
+//CLOSURES
+
+
+function retirement(retirementAge) {
+    var a = " years left until retirement!"
+    return function(yearOfBirth) {
+        var age = 2019 - yearOfBirth;
+        console.log((retirementAge - age) + a);
+    }
 }
-game();
 
-(
-    function() {
-        var score = Math.random() * 10;
-        console.log(score>= 5);  
-    }
-)();
+var retirementUS = retirement(66);
+retirementUS(1994);
 
-(
-    function(goodLuck) {
-        var score = Math.random() * 10;
-        console.log(score>= 5 - goodLuck);  
-    }
-)(5);
+retirement(64)(1994);
+
