@@ -58,22 +58,22 @@ jane.calculateAge();*/
 //primitives vs objects
 
 //primitives
-var a = 23;
-var b = a;
-a = 46;
+// var a = 23;
+// var b = a;
+// a = 46;
 // console.log(a);
 // console.log(b);
 
 
 //objects
-var obj1 = {
-    name: "John",
-    age: 26
-}     
+// var obj1 = {
+//     name: "John",
+//     age: 26
+// }     
 
-var obj2 = obj1;
+//var obj2 = obj1;
 //they will be the same objects. 
-obj1.age = 30; //changing age on obj1 will do the same on obj2
+//obj1.age = 30; //changing age on obj1 will do the same on obj2
 // console.log(obj1.age);
 // console.log(obj2.age);
 
@@ -183,17 +183,80 @@ obj1.age = 30; //changing age on obj1 will do the same on obj2
 
 //CLOSURES
 
+// function retirement(retirementAge) {
+//     var a = " years left until retirement!"
+//     return function(yearOfBirth) {
+//         var age = 2019 - yearOfBirth;
+//         console.log((retirementAge - age) + a);
+//     }
+// }
 
-function retirement(retirementAge) {
-    var a = " years left until retirement!"
-    return function(yearOfBirth) {
-        var age = 2019 - yearOfBirth;
-        console.log((retirementAge - age) + a);
+// var retirementUS = retirement(66);
+// retirementUS(1990);
+// //OR:
+
+// retirement(66)(1990);
+
+// var retirementMK = retirement(64);
+// retirementMK(1994);
+
+// var interviewQuestion = (job) => {
+    //     if(job === "designer") {
+    //         return function(name) {
+    //             console.log(name + ", can you please explain what UX design is?");
+    //         }
+    //     } else if (job === "teacher"){
+    //         return function(name) {
+    //             console.log(name + ", what subject do you teach?");
+    //         }
+    //     } else {
+    //         return function(name) {
+    //             console.log("Hello " + name + ", what do you do? ");
+    //         }
+    //     }
+    // } 
+
+//     var interviewQuestion = (job) => {
+//         var phrase = " "
+//         return function(name) {
+//             if(job === "designer") {
+//                             console.log(name + ", can you please explain what UX design is?");
+//                         }
+//                      else if (job === "teacher"){
+//                             console.log(name + ", what subject do you teach?");
+//                     } else {
+//                             console.log("Hello " + name + ", what do you do? ");
+//                         }
+//                     }
+//         }
+
+// var jobDesigner = interviewQuestion("designer");
+// jobDesigner("Stefan");
+// var jobTeacher = interviewQuestion("teacher");
+// jobTeacher("Michael");
+// interviewQuestion()("Jack");
+
+
+//BIND,CALL and APPLY
+
+var john = {
+    name: "John",
+    age: 25,
+    job: "teacher",
+    presentation: function(style, timeOfDay) {
+        if( style === "formal") {
+            console.log("Good " + timeOfDay + ", ladies and gentlemen! I\'m " + this.name + " ,I am a " + this.job + " and I am " + this.age + " years old!")
+        }else if(style === "friendly") {
+            console.log("Hey! Whats up? " + "I\'m " + this.name + " ,I am a " + this.job + " and I am " + this.age + " years old! Have a nice " + timeOfDay + "!")
+        }
     }
 }
 
-var retirementUS = retirement(66);
-retirementUS(1994);
+john.presentation("formal", "morning");
+john.presentation("friendly", "morning");
 
-retirement(64)(1994);
-
+var emily = {
+    name: "Emily",
+    age: 35,
+    job: "designer"
+}
