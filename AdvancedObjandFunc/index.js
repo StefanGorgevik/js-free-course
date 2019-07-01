@@ -239,24 +239,67 @@ jane.calculateAge();*/
 
 //BIND,CALL and APPLY
 
-var john = {
-    name: "John",
-    age: 25,
-    job: "teacher",
-    presentation: function(style, timeOfDay) {
-        if( style === "formal") {
-            console.log("Good " + timeOfDay + ", ladies and gentlemen! I\'m " + this.name + " ,I am a " + this.job + " and I am " + this.age + " years old!")
-        }else if(style === "friendly") {
-            console.log("Hey! Whats up? " + "I\'m " + this.name + " ,I am a " + this.job + " and I am " + this.age + " years old! Have a nice " + timeOfDay + "!")
-        }
+// var john = {
+//     name: "John",
+//     age: 25,
+//     job: "teacher",
+//     presentation: function(style, timeOfDay) {
+//         if( style === "formal") {
+//             console.log("Good " + timeOfDay + ", ladies and gentlemen! I\'m " + this.name + " ,I am a " + this.job + " and I am " + this.age + " years old!")
+//         }else if(style === "friendly") {
+//             console.log("Hey! Whats up? " + "I\'m " + this.name + " ,I am a " + this.job + " and I am " + this.age + " years old! Have a nice " + timeOfDay + "!")
+//         }
+//     }
+// }
+
+// john.presentation("formal", "morning");
+
+// var emily = {
+//     name: "Emily",
+//     age: 35,
+//     job: "designer"
+// }
+
+// john.presentation.call(emily,"friendly", "afternoon");
+
+// //john.presentation.apply(emily, ["friendly", "morning"]); // the call method accepts an array(doesn't work in this exm.)
+
+// //***BIND
+
+// var johnFriendly = john.presentation.bind(john, "friendly");
+
+// johnFriendly("morning");
+// johnFriendly("night");
+
+// var emilyFormal = john.presentation.bind(emily,"formal");
+// emilyFormal("afternoon");
+
+
+
+//EXAMPLE
+
+var years = [1990, 1994, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr,fn) {
+    var arrRes = [];
+    for(var i = 0; i < arr.length; i++) {
+       arrRes.push(fn(arr[i])); 
     }
+    return arrRes;
 }
 
-john.presentation("formal", "morning");
-john.presentation("friendly", "morning");
-
-var emily = {
-    name: "Emily",
-    age: 35,
-    job: "designer"
+function calcAge(el) {
+    return 2019 - el;
 }
+
+function isFullAge(limit,el) {
+    return el >= limit;
+}
+
+var ages = arrayCalc(years, calcAge);
+
+var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+
+
+console.log(ages);
+console.log(fullJapan);
