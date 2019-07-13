@@ -18,113 +18,72 @@ c) correct answer (I would use a number for this)
 
 7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
 */
-class Question {
-    constructor(arrQuestion, arrAnswer) {
-        this.arrQuestion = arrQuestion;
-        this.arrAnswer = arrAnswer; 
-    }
-    quesAnsw() {
-        console.log(this.arrQuestion);
-        for(var i = 0; i < this.arrAnswer.length; i++) {
-            console.log((i + 1) + ": " + this.arrAnswer[i]);
-        }
-    }
-    guess() {
-        var answer = prompt("Enter your answer!") 
-        if(answer !== this.arrAnswer[0]) {
-            answer = prompt("Wrong! Enter again!");
-        } else if(answer === this.arrAnswer[0]) {
-            console.log("You got it!");
-        }
-    }
-}
 
-var queans1 = {question: "Favorite kind of music?",answer: ["Rock", "Turbofolk", "Trap"]};
-var queans2 = {question: "Can you dance?",answer: ["Yes", "No"]};
-
-// console.log(queans1);
-// console.log(queans2);
-
-var question1 = new Question(queans1["question"], queans1["answer"]);
-var question2 = new Question(queans2["question"], queans2["answer"]);
-
-// console.log(question1);
-// console.log(question2);
-
-question1.quesAnsw()
-question1.guess();
-
-
-/*
---- Let's build a fun quiz game in the console! ---
-
-1. Build a function constructor called Question to describe a question. A question should include:
-a) question itself
-b) the answers from which the player can choose the correct one (choose an adequate data structure here, array, object, etc.)
-c) correct answer (I would use a number for this)
-
-2. Create a couple of questions using the constructor
-
-3. Store them all inside an array
-
-4. Select one random question and log it on the console, together with the possible answers (each question should have a number) (Hint: write a method for the Question objects for this task).
-
-5. Use the 'prompt' function to ask the user for the correct answer. The user should input the number of the correct answer such as you displayed it on Task 4.
-
-6. Check if the answer is correct and print to the console whether the answer is correct ot nor (Hint: write another method for this).
-
-7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
-*/
-
-
-/*
 (function() {
     function Question(question, answers, correct) {
         this.question = question;
         this.answers = answers;
         this.correct = correct;
     }
-
-    Question.prototype.displayQuestion = function() {
+    
+    Question.prototype.displayQuestion =
+    function() {
         console.log(this.question);
-
-        for (var i = 0; i < this.answers.length; i++) {
-            console.log(i + ': ' + this.answers[i]);
+        for(let i = 0; i < this.answers.length; i++) {
+            console.log(i + ": " + this.answers[i]);
         }
     }
-
-    Question.prototype.checkAnswer = function(ans) {
-        if (ans === this.correct) {
-            console.log('Correct answer!');
-
-        } else {
-            console.log('Wrong answer. Try again :)')
+    
+    Question.prototype.checkAnswer = 
+    function(ans, cb) {
+        var sc;
+        if(ans === this.correct) {
+            console.log("Correct answer!");
+            sc = cb(true);
+        }else {
+            console.log("Wrong answer! Try again!");
+            sc = cb(false);
         }
+        this.displayScore(sc);
     }
 
-    var q1 = new Question('Is JavaScript the coolest programming language in the world?',
-                          ['Yes', 'No'],
-                          0);
-
-    var q2 = new Question('What is the name of this course\'s teacher?',
-                          ['John', 'Micheal', 'Jonas'],
-                          2);
-
-    var q3 = new Question('What does best describe coding?',
-                          ['Boring', 'Hard', 'Fun', 'Tediuos'],
-                          2);
-
+    Question.prototype.displayScore =
+    function(score) {
+        console.log(`Your current score is ${score}`);
+        console.log("-------------------------------");
+    }
+    
+    var q1 = new Question("Is JS the coolest programming language in the world?", ["Yes", "No"], 0);  
+    var q2 = new Question("What's the name of this course\' teacher?", ["John", "Michael", "Jonas"], 2);
+    var q3 = new Question("What does best describe coding?", ["Boring", "Hard", "Fun", "Tediuos"], 2);
     var questions = [q1, q2, q3];
 
-    var n = Math.floor(Math.random() * questions.length);
+    function score() {
+        var sc = 0;
+        return function(correct) {
+            if(correct) {
+                sc++;
+            }else {
+                sc--;
+            }
+            return sc;
+        }
+    }
 
-    questions[n].displayQuestion();
+    var keepScore = score();
+ 
+    function nextQuestion() {
+        var n = Math.floor(Math.random() * questions.length);
+        questions[n].displayQuestion(); 
+        var answer = prompt("Enter your answer!"); 
 
-    var answer = parseInt(prompt('Please select the correct answer.'));
-
-    questions[n].checkAnswer(answer);
+        if(answer !== "exit") {
+            questions[n].checkAnswer(parseInt(answer), keepScore);
+            nextQuestion();
+        } 
+    }
+    nextQuestion();
 })();
-*/
 
 
 
